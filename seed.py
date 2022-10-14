@@ -14,7 +14,7 @@ CREATE TABLE `users` (
   `user_lastname` varchar(32) NOT NULL
 )
 """)
-
+# Create `jobs` table
 cur.execute("""
 DROP TABLE IF EXISTS `jobs`;
 """)
@@ -28,5 +28,18 @@ CREATE TABLE `jobs` (
   `job_salary` varchar(64) NOT NULL,
   `job_user_id` INTEGER NOT NULL,
   FOREIGN KEY(job_user_id) REFERENCES users(user_id)
+)
+""")
+# Create `settings` table
+cur.execute("""
+DROP TABLE IF EXISTS `settings`;
+""")
+cur.execute("""
+CREATE TABLE `settings` (
+  `setting_id` INTEGER PRIMARY KEY NOT NULL,
+  `setting_key` varchar(32) NOT NULL,
+  `setting_value` varchar(32) NOT NULL,
+  `setting_user_id` INTEGER NOT NULL,
+  FOREIGN KEY(setting_user_id) REFERENCES users(user_id)
 )
 """)
